@@ -1,0 +1,36 @@
+# ── Restricted assets: HARD BOUNDARY — never commit, ever ──────────────
+Assets/DO-NOT-USE-RESTRICTED/
+
+# ── Source material kept out of the code repository ────────────────────
+# Brand/content assets (logos, proposals, PDFs) and the Wayback recovery
+# archive live on local disk only. The org-level `.github` repo holds the
+# approved public brand logo.
+Assets/
+legacy-site-archive/
+
+# ── Agent tooling ───────────────────────────────────────────────────────
+.freebuff/
+
+# ── OS cruft ────────────────────────────────────────────────────────────
+.DS_Store
+
+# ── Python ──────────────────────────────────────────────────────────────
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.pytest_cache/
+.coverage
+htmlcov/
+
+# ── Node ────────────────────────────────────────────────────────────────
+node_modules/
+dist/
+dist-ssr/
+*.local
+.vite/
+
+# ── Environment / secrets ───────────────────────────────────────────────
+.env
+.env.*
+!.env.example

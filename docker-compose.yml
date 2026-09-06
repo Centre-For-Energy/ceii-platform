@@ -1,0 +1,69 @@
+name: ceii-platform
+
+services:
+  db:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-ceii}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-ceii}
+      POSTGRES_DB: ${POSTGRES_DB:-ceii}
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-ceii} -d ${POSTGRES_DB:-ceii}"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  backend:
+    build: ./backend
+    environment:
+      # In-container host is the `db` service; local development overrides
+      # this with DATABASE_URL from .env (localhost).
+      DATABASE_URL: postgresql+psycopg://${POSTGRES_USER:-ceii}:${POSTGRES_PASSWORD:-ceii}@db:5432/${POSTGRES_DB:-ceii}
+    ports:
+      - "8000:8000"
+    depends_on:
+      db:
+        condition: service_healthy
+
+  frontend:
+    build: ./frontend
+    ports:
+      - "4173:4173"
+    depends_on:
+      - backend
+
+  cms:
+    # Strapi v5 (self-hosted, open-source). No app code is committed in
+    # Phase 1; the official image generates the project at first boot.
+    image: strapi/strapi:5
+    environment:
+      NODE_ENV: development
+      DATABASE_CLIENT: postgres
+      DATABASE_HOST: db
+      DATABASE_PORT: 5432
+      DATABASE_NAME: ${POSTGRES_DB:-ceii}
+      DATABASE_USERNAME: ${POSTGRES_USER:-ceii}
+      DATABASE_PASSWORD: ${POSTGRES_PASSWORD:-ceii}
+      DATABASE_SSL: "false"
+      # Development-only placeholder secrets. Generate real values (see
+      # .env.example) before any non-local deployment — never in production.
+      APP_KEYS: ${APP_KEYS:-dev-only-app-keys-comma-separated}
+      API_TOKEN_SALT: ${API_TOKEN_SALT:-dev-only-api-token-salt}
+      ADMIN_JWT_SECRET: ${ADMIN_JWT_SECRET:-dev-only-admin-jwt-secret}
+      TRANSFER_TOKEN_SALT: ${TRANSFER_TOKEN_SALT:-dev-only-transfer-token-salt}
+      JWT_SECRET: ${JWT_SECRET:-dev-only-jwt-secret}
+    ports:
+      - "1337:1337"
+    volumes:
+      - cms_uploads:/opt/app/public/uploads
+    depends_on:
+      db:
+        condition: service_healthy
+
+volumes:
+  pgdata:
+  cms_uploads:

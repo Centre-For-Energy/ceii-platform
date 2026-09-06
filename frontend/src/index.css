@@ -1,0 +1,40 @@
+@import "tailwindcss";
+
+/*
+ * CEII design tokens — extracted from the organisation's safe brand assets
+ * (see ENGINEERING-BASELINE.md). Dark green #024B38 and vibrant orange
+ * #FF6200 are the institutional palette.
+ */
+@theme {
+  --color-brand-green: #024b38;
+  --color-brand-green-deep: #003f0e;
+  --color-brand-orange: #ff6200;
+  --color-brand-orange-soft: #f58334;
+  --color-brand-paper: #f7f5f0;
+  --color-brand-ink: #1c1c1a;
+
+  --font-sans: "Avenir Next", "Segoe UI", system-ui, -apple-system, "Helvetica Neue", sans-serif;
+}
+
+@layer base {
+  body {
+    @apply bg-brand-paper text-brand-ink font-sans antialiased;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-brand-orange);
+    outline-offset: 2px;
+  }
+}
+
+/* Respect reduced-motion preferences (WCAG 2.3.3) */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
