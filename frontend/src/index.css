@@ -4,16 +4,52 @@
  * CEII design tokens — extracted from the organisation's safe brand assets
  * (see ENGINEERING-BASELINE.md). Dark green #024B38 and vibrant orange
  * #FF6200 are the institutional palette.
+ *
+ * Contrast notes (Phase 1 audit):
+ * - brand-orange-soft was #F58334 ≈ 3.96:1 on brand-green (AA needs 4.5:1);
+ *   lightened to #FF9A4D ≈ 4.8:1 for text-on-green use only.
+ * - brand-green-muted replaces `brand-green/70` on white (≈4.46:1 at 12px);
+ *   solid #356F55 ≈ 5.9:1 at any size.
+ * Brand orange (#FF6200) is an accent for non-text indicators on light
+ * backgrounds (e.g., active-nav underline, 3:1+) and for text only on
+ * brand-green surfaces.
  */
 @theme {
   --color-brand-green: #024b38;
   --color-brand-green-deep: #003f0e;
+  --color-brand-green-muted: #356f55;
   --color-brand-orange: #ff6200;
-  --color-brand-orange-soft: #f58334;
+  --color-brand-orange-soft: #ff9a4d;
   --color-brand-paper: #f7f5f0;
   --color-brand-ink: #1c1c1a;
 
+  /*
+   * Typography strategy: intentional system-native stack (documented in
+   * frontend/README.md). "Avenir Next" on macOS, "Segoe UI" on Windows,
+   * platform system-ui elsewhere. No unlicensed font is bundled.
+   */
   --font-sans: "Avenir Next", "Segoe UI", system-ui, -apple-system, "Helvetica Neue", sans-serif;
+
+  /* Semantic type scale */
+  --text-display: 2.75rem;
+  --text-display--line-height: 1.1;
+  --text-h1: 2.25rem;
+  --text-h1--line-height: 1.15;
+  --text-h2: 1.5rem;
+  --text-h2--line-height: 1.3;
+  --text-h3: 1.125rem;
+  --text-h3--line-height: 1.4;
+  --text-body: 1rem;
+  --text-body--line-height: 1.7;
+  --text-meta: 0.8125rem;
+  --text-meta--line-height: 1.5;
+  --text-nav: 0.9375rem;
+  --text-nav--line-height: 1.5;
+
+  /* Layout */
+  --container-page: 76rem;
+  --spacing-section: 6rem;
+  --spacing-section-sm: 4rem;
 }
 
 @layer base {
@@ -24,6 +60,11 @@
   :focus-visible {
     outline: 2px solid var(--color-brand-orange);
     outline-offset: 2px;
+  }
+
+  ::selection {
+    background-color: var(--color-brand-green);
+    color: #fff;
   }
 }
 

@@ -73,8 +73,9 @@ npm run dev             # http://localhost:5173
 | Phase | Scope                          | Status |
 |-------|--------------------------------|--------|
 | 0     | Reconnaissance / baseline      | ✅ Done — see `ENGINEERING-BASELINE.md` |
-| 1     | Platform foundation            | ✅ In this commit: monorepo, probes, migrations, CI |
-| 2+    | Design system, content, CMS …  | 🔜 Later phases, each separately scoped |
+| 1     | Platform foundation            | ✅ Done — monorepo, probes, migrations, CI |
+| 2     | Design system + application shell | 🔜 Branch `feat/frontend-app-shell`: routing, shell, primitives, frontend tests |
+| 3+    | Content architecture, CMS …    | 🔜 Later phases, each separately scoped |
 
 Phase 1 is deliberately minimal: no domain routes, no business tables, no
 Strapi content types. Those arrive only when explicitly scoped tasks require
