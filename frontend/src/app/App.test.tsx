@@ -23,8 +23,14 @@ describe('application shell', () => {
   it('renders the home page by default', async () => {
     renderAt('/')
     expect(
-      await screen.findByRole('heading', { level: 1, name: /advancing energy investment/i }),
+      await screen.findByRole('heading', { level: 1, name: /accelerating investment and innovation/i }),
     ).toBeInTheDocument()
+  })
+
+  it('resolves page metadata for trailing-slash URLs', async () => {
+    renderAt('/about/')
+    expect(await screen.findByRole('heading', { level: 1, name: 'About CEII' })).toBeInTheDocument()
+    expect(document.title).toBe('About CEII')
   })
 
   it('navigates from the primary navigation to a route', async () => {

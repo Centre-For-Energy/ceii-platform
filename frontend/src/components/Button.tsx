@@ -1,7 +1,7 @@
 import type { ButtonHTMLAttributes, ReactNode } from 'react'
 import { Link } from 'react-router'
 
-export type ButtonVariant = 'primary' | 'secondary'
+export type ButtonVariant = 'primary' | 'secondary' | 'inverse' | 'outline-light'
 
 const base =
   'inline-flex items-center justify-center gap-2 px-5 py-2.5 text-sm font-semibold ' +
@@ -10,6 +10,10 @@ const base =
 const variants: Record<ButtonVariant, string> = {
   primary: 'bg-brand-green text-white hover:bg-brand-green-deep',
   secondary: 'border border-brand-green/30 text-brand-green hover:bg-brand-green hover:text-white',
+  // On dark (brand-green) surfaces: solid white CTA.
+  inverse: 'bg-white text-brand-green hover:bg-brand-paper',
+  // On dark surfaces: outlined CTA.
+  'outline-light': 'border border-white/40 text-white hover:bg-white/10',
 }
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {

@@ -13,7 +13,7 @@
 import type { ReactNode } from 'react'
 import { useLocation } from 'react-router'
 import type { PageMeta } from '../lib/seo'
-import { HomePage } from '../pages/HomePage'
+import { HomePage } from '../pages/HomePage/HomePage'
 import { NotFoundPage } from '../pages/NotFoundPage'
 import { PlaceholderPage } from '../pages/PlaceholderPage'
 
@@ -40,11 +40,18 @@ const DEFAULT_META: PageMeta = {
     'Accelerating investment and innovation within the global energy industry. Abuja, Nigeria.',
 }
 
+/** Home page metadata — institutional positioning drawn from approved org content. */
+const HOME_META: PageMeta = {
+  title: 'Centre for Energy Investment and Innovation (CEII)',
+  description:
+    'A multi-disciplinary advisory and investment facilitation organisation headquartered in Abuja, Nigeria — advancing energy investment, energy transition, and innovation across Africa and beyond.',
+}
+
 export const APP_ROUTES: AppRoute[] = [
   {
     path: '/',
     element: <HomePage />,
-    meta: DEFAULT_META,
+    meta: HOME_META,
   },
   {
     path: '/about',
@@ -83,10 +90,16 @@ export const APP_ROUTES: AppRoute[] = [
   },
 ]
 
-/** Resolves the metadata for the current pathname (exact match, then 404). */
+/**
+ * Resolves the metadata for the current pathname.
+ *
+ * Trailing slashes are normalized before lookup so `/about/` and `/about`
+ * resolve to the same page metadata (canonical URLs already strip them).
+ */
 export function useRouteMeta(): PageMeta {
   const { pathname } = useLocation()
-  const match = APP_ROUTES.find((route) => route.path === pathname)
+  const normalized = pathname.replace(/\/+$/, '') || '/'
+  const match = APP_ROUTES.find((route) => route.path === normalized)
   if (match) return match.meta
   const fallback = APP_ROUTES.find((route) => route.path === '*')
   return fallback?.meta ?? DEFAULT_META
