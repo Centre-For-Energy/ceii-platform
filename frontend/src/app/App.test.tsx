@@ -29,7 +29,7 @@ describe('application shell', () => {
 
   it('resolves page metadata for trailing-slash URLs', async () => {
     renderAt('/about/')
-    expect(await screen.findByRole('heading', { level: 1, name: 'About CEII' })).toBeInTheDocument()
+    expect(await screen.findByRole('heading', { level: 1, name: /about the centre/i })).toBeInTheDocument()
     expect(document.title).toBe('About CEII')
   })
 
@@ -37,7 +37,7 @@ describe('application shell', () => {
     const user = userEvent.setup()
     renderAt('/')
     await user.click(screen.getByRole('link', { name: 'About' }))
-    expect(await screen.findByRole('heading', { level: 1, name: 'About CEII' })).toBeInTheDocument()
+    expect(await screen.findByRole('heading', { level: 1, name: /about the centre/i })).toBeInTheDocument()
   })
 
   it('renders the not-found page for unknown routes', async () => {
