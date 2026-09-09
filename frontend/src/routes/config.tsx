@@ -13,6 +13,7 @@
 import type { ReactNode } from 'react'
 import { useLocation } from 'react-router'
 import type { PageMeta } from '../lib/seo'
+import { AboutPage } from '../pages/AboutPage/AboutPage'
 import { HomePage } from '../pages/HomePage/HomePage'
 import { NotFoundPage } from '../pages/NotFoundPage'
 import { PlaceholderPage } from '../pages/PlaceholderPage'
@@ -55,8 +56,12 @@ export const APP_ROUTES: AppRoute[] = [
   },
   {
     path: '/about',
-    element: <PlaceholderPage eyebrow="About CEII" title="About CEII" />,
-    meta: { title: 'About CEII', description: 'About the Centre for Energy Investment and Innovation (CEII).' },
+    element: <AboutPage />,
+    meta: {
+      title: 'About CEII',
+      description:
+        'The Centre for Energy Investment and Innovation (CEII) is a multi-disciplinary energy advisory and investment facilitation organisation headquartered in Abuja, Nigeria.',
+    },
   },
   {
     path: '/governance',
