@@ -18,6 +18,7 @@ import { GovernancePage } from '../pages/GovernancePage/GovernancePage'
 import { HomePage } from '../pages/HomePage/HomePage'
 import { NotFoundPage } from '../pages/NotFoundPage'
 import { PlaceholderPage } from '../pages/PlaceholderPage'
+import { ProgramsPage } from '../pages/ProgramsPage/ProgramsPage'
 
 export interface AppRoute {
   path: string
@@ -75,8 +76,12 @@ export const APP_ROUTES: AppRoute[] = [
   },
   {
     path: '/programs',
-    element: <PlaceholderPage eyebrow="Programs" title="Programs" />,
-    meta: { title: 'Programs — CEII', description: 'Programs of the Centre for Energy Investment and Innovation.' },
+    element: <ProgramsPage />,
+    meta: {
+      title: 'Programs — CEII',
+      description:
+        'The Centre’s areas of work, key initiatives, and strategic focus across energy investment, energy transition, and innovation.',
+    },
   },
   {
     path: '/news',
