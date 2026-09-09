@@ -43,6 +43,18 @@ describe('governance page', () => {
     ).toBeInTheDocument()
   })
 
+  it('renders the Director General quote with the exact published wording', async () => {
+    renderGovernance()
+    // Verbatim guard — the quote must match the CEII-published 2024 article
+    // (legacy-site-archive/article-grema-energy.html), including the
+    // contraction "We're" (typographic apostrophe), not "We are".
+    expect(
+      await screen.findByText(
+        /We’re creating a conducive environment for innovation, investment, and knowledge sharing, significantly contributing to the growth and development of the energy industry/,
+      ),
+    ).toBeInTheDocument()
+  })
+
   it('does not fabricate unverified personnel', () => {
     renderGovernance()
     // Only one person entry is verified; no roster cards may exist.

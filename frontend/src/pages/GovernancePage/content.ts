@@ -76,7 +76,7 @@ export const DIRECTOR_GENERAL = {
   description:
     'Leads the Centre’s work convening industry professionals, researchers, and policymakers, and has built strategic partnerships in support of energy projects and initiatives across Nigeria and Africa.',
   quote: {
-    text: 'We are creating a conducive environment for innovation, investment, and knowledge sharing, significantly contributing to the growth and development of the energy industry.',
+    text: 'We’re creating a conducive environment for innovation, investment, and knowledge sharing, significantly contributing to the growth and development of the energy industry.',
     attribution: 'Grema Sulaiman Ahmad, CEII (2024)',
   },
 } as const
