@@ -14,6 +14,7 @@ import type { ReactNode } from 'react'
 import { useLocation } from 'react-router'
 import type { PageMeta } from '../lib/seo'
 import { AboutPage } from '../pages/AboutPage/AboutPage'
+import { GovernancePage } from '../pages/GovernancePage/GovernancePage'
 import { HomePage } from '../pages/HomePage/HomePage'
 import { NotFoundPage } from '../pages/NotFoundPage'
 import { PlaceholderPage } from '../pages/PlaceholderPage'
@@ -65,8 +66,12 @@ export const APP_ROUTES: AppRoute[] = [
   },
   {
     path: '/governance',
-    element: <PlaceholderPage eyebrow="Governance" title="Governance" />,
-    meta: { title: 'Governance — CEII', description: 'Governance information for the Centre for Energy Investment and Innovation.' },
+    element: <GovernancePage />,
+    meta: {
+      title: 'Governance — CEII',
+      description:
+        'The governance and institutional leadership of the Centre for Energy Investment and Innovation: its boards, management structure, and the Office of the Director General.',
+    },
   },
   {
     path: '/programs',
