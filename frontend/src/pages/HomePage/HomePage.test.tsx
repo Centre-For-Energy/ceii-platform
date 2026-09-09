@@ -33,12 +33,14 @@ describe('home page', () => {
     expect(screen.getByRole('link', { name: 'Contact the Centre' })).toHaveAttribute('href', '/contact')
   })
 
-  it('renders every focus area from the typed content', async () => {
+  it('renders every focus area from the typed content and links into the canonical detail', async () => {
     renderHome()
     const section = await sectionByHeading(/six areas of institutional focus/i)
     for (const area of FOCUS_AREAS) {
       expect(within(section).getByRole('heading', { level: 3, name: area.title })).toBeInTheDocument()
     }
+    // Preview pass: Home points into the canonical /programs detail.
+    expect(within(section).getByRole('link', { name: 'Explore our programs' })).toHaveAttribute('href', '/programs')
   })
 
   it('renders the institutional objectives list', async () => {
@@ -47,12 +49,15 @@ describe('home page', () => {
     expect(within(section).getAllByRole('listitem')).toHaveLength(OBJECTIVES.length)
   })
 
-  it('renders every initiative from the typed content', async () => {
+  it('renders every initiative from the typed content and links into the canonical detail', async () => {
     renderHome()
     const section = await sectionByHeading(/programmes and frameworks/i)
     for (const initiative of INITIATIVES) {
       expect(within(section).getByRole('heading', { level: 3, name: initiative.title })).toBeInTheDocument()
     }
+    // Preview pass: Home renders initiative titles only — descriptions live on /programs.
+    expect(within(section).queryByText('Attracting foreign direct investment into Nigeria’s energy sector.')).toBeNull()
+    expect(within(section).getByRole('link', { name: 'Explore our programs' })).toHaveAttribute('href', '/programs')
   })
 
   it('shows an explicit empty state for editorial content rather than fabricated news', async () => {

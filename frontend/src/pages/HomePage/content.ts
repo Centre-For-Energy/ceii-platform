@@ -10,6 +10,12 @@
  * When editorial/CMS integration lands, this module is the seam: each
  * section below consumes typed data and can be switched to the content
  * API without rewriting section components.
+ *
+ * Preview relationship: /programs is the canonical detailed presentation
+ * of the focus areas and key initiatives. Home renders concise previews
+ * of the same approved content — identical wording, no additional detail
+ * — and links to /programs. Descriptions for key initiatives are
+ * deliberately not rendered on Home.
  */
 
 export interface FocusArea {
@@ -25,7 +31,7 @@ export const FOCUS_AREAS: FocusArea[] = [
   },
   {
     title: 'Sovereign Fund Development',
-    description: 'Creating structured investment vehicles, including the New Niger Fund and the New Liberia Fund.',
+    description: 'Creating structured investment vehicles.',
   },
   {
     title: 'Energy Transition Strategy',
@@ -41,7 +47,7 @@ export const FOCUS_AREAS: FocusArea[] = [
   },
   {
     title: 'Research & Publications',
-    description: 'Energy market analysis, sector reports, and institutional publications.',
+    description: 'Energy market analysis, OPEC bulletins, sector reports.',
   },
 ]
 
@@ -50,7 +56,11 @@ export interface Initiative {
   description: string
 }
 
-/** Source: org profile README — "Key Initiatives". */
+/**
+ * Source: org profile README — "Key Initiatives".
+ * Home renders the titles only (concise preview); the canonical
+ * descriptions are presented on /programs.
+ */
 export const INITIATIVES: Initiative[] = [
   {
     title: 'Nigeria Energy Transition Fund (NETFUND)',
