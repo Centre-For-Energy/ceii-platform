@@ -1,3 +1,4 @@
+import { ButtonLink } from '../../../components/Button'
 import { Card } from '../../../components/Card'
 import { Container } from '../../../components/Container'
 import { SectionHeading } from '../../../components/SectionHeading'
@@ -6,6 +7,9 @@ import { FOCUS_AREAS } from '../content'
 /**
  * Focus areas — the six institutional workstreams as a reusable card
  * grid. Content is typed data (content.ts), not inline JSX.
+ *
+ * Concise preview: /programs is the canonical presentation of this
+ * content; the section closes with a link into the full detail.
  */
 export function FocusAreasSection() {
   return (
@@ -26,6 +30,11 @@ export function FocusAreasSection() {
               <p className="mt-2 text-body leading-relaxed text-brand-ink/80">{area.description}</p>
             </Card>
           ))}
+        </div>
+        <div className="mt-10">
+          <ButtonLink to="/programs" variant="secondary">
+            Explore our programs
+          </ButtonLink>
         </div>
       </Container>
     </section>
